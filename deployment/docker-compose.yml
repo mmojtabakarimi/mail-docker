@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  mail-app:
+    build:
+      context: ../
+      dockerfile: deployment/mail.Dockerfile
+    restart: always          
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/vmail:/val/vmail
+      - ./data/log:/varl/log
+    ports:
+      - 2999:80
+      - 143:143
+      - 110:110
+      - 465:465
+      - 993:993
+      - 995:995
+      - "25:25/tcp"
+
+    environment:
+      - DOMAIN_NAME=k-doostdashtani.ir
+      - ADMIN_PASSWD=mojtaba6128
+      - USERS=user1:pass1,user2:pass2
+      - ADMIN_USERNAME=admin
